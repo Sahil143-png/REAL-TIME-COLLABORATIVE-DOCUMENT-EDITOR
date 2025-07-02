@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
 import Quill from "quill";
@@ -19,8 +19,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const editor = document.createElement("div");
-    document.body.append(editor);
+    const editor = document.getElementById("editor"); // <-- FIXED LINE
     quill = new Quill(editor, { theme: "snow" });
     quill.disable();
     quill.setText("Loading...");
@@ -35,7 +34,7 @@ export default function App() {
     });
 
     socket.emit("get-document", documentId);
-  }, [socket, quill, documentId]);
+  }, [documentId]);
 
   useEffect(() => {
     if (socket == null || quill == null) return;
@@ -48,7 +47,7 @@ export default function App() {
     return () => {
       socket.off("receive-changes", handler);
     };
-  }, [socket, quill]);
+  }, []);
 
   useEffect(() => {
     if (socket == null || quill == null) return;
@@ -62,7 +61,7 @@ export default function App() {
     return () => {
       quill.off("text-change", handler);
     };
-  }, [socket, quill]);
+  }, []);
 
   useEffect(() => {
     if (socket == null || quill == null) return;
@@ -72,7 +71,8 @@ export default function App() {
     }, SAVE_INTERVAL_MS);
 
     return () => clearInterval(interval);
-  }, [socket, quill]);
+  }, []);
 
   return <div id="editor" style={{ padding: "50px" }} />;
 }
+
