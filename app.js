@@ -75,4 +75,3 @@ export default function App() {
 
   return <div id="editor" style={{ padding: "50px" }} />;
 }
-
