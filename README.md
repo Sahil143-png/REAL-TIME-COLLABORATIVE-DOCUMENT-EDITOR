@@ -58,3 +58,7 @@ Unique Document IDs: UUID
 3. Manage a NoSQL database.
 
 4. Build responsive, interactive UIs using React.
+
+
+
+<img width="709" height="705" alt="Image" src="https://github.com/user-attachments/assets/597e5a65-64ae-469e-9b0d-7686e8232f6e" />
